@@ -1,0 +1,289 @@
+:root{
+  --bg: #f5f6f8;
+  --text: #111;
+  --sub: rgba(0,0,0,.55);
+  --card: rgba(255,255,255,.92);
+  --border: rgba(0,0,0,.10);
+}
+
+*{ box-sizing: border-box; }
+
+html, body{
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app{
+  min-height: 100svh;     /* ✅ 全屏高度（比 100vh 更适合手机） */
+  width: 100%;            /* ✅ 全屏宽度 */
+  max-width: none;        /* ✅ 取消 520px 限制 */
+  margin: 0;              /* ✅ 取消居中 */
+  background: var(--bg);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 只有屏幕很宽（平板/电脑）才居中限制宽度 */
+@media (min-width: 700px){
+  .app{
+    max-width: 520px;
+    margin: 0 auto;
+  }
+}
+
+.top{
+  padding: 18px 16px 10px;
+}
+
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo{
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8px 18px rgba(0,0,0,.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.title{
+  font-size: 50px;   /* 原来 18 */
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.subtitle{
+  font-size: 40px;   /* 原来 12 */
+  color: var(--sub);
+  margin-top: 2px;
+}
+
+.panel{
+  margin: 0 16px;
+  padding: 14px;
+  border-radius: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 25px rgba(0,0,0,.08);
+}
+
+.label{
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.row{
+  display: flex;
+  gap: 10px;
+}
+
+.input{
+  width: 100%;
+  padding: 14px 14px;   /* 顺便变高一点 */
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  font-size: 17px;      /* 👈 放大 */
+  outline: none;
+  background: #fff;
+}
+
+.btn{
+  width: 100%;
+  padding: 14px;
+  border: 0;
+  border-radius: 12px;
+  background: #111;
+  color: #fff;
+  font-size: 25px;   /* 👈 很像 App */
+}
+
+.btn:disabled{
+  opacity: .75;
+}
+
+.hint{
+  margin-top: 15px;
+  font-size: 30px;
+  line-height: 1.6;
+  font-weight: 500;
+  color: var(--sub);
+}
+.content{
+  padding: 0 16px 24px;
+}
+
+.card{
+  border-radius: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,.08);
+}
+
+.modal-title{
+  font-weight: 800;
+  font-size: 30px;   /* 👈 标题变大 */
+  margin-top: 15px;
+}
+
+.img{
+  height: 220px;
+  background: url("https://pic1.imgdb.cn/item/6959fa27f837d035564ab2a4.jpg") no-repeat center / cover;
+}
+
+.list{
+  padding: 10px 14px 14px;
+}
+
+.item{
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+  font-size: 30px;   /* 原来 14 */
+}
+.item:last-child{ border-bottom: 0; }
+
+/* ========= 居中弹窗 Modal ========= */
+.modal{
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 9999;
+}
+.modal.show{ display: block; }
+
+.modal-backdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(2px);
+}
+
+.modal-card{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(86vw, 360px);   /* 👈 比之前大 */
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.25);
+  padding: 22px 20px;        /* 👈 内边距加大 */
+  text-align: center;
+}
+
+@keyframes pop{
+  from{ transform: translate(-50%, -50%) scale(.94); opacity: .4; }
+  to{ transform: translate(-50%, -50%) scale(.98); opacity: 1; }
+}
+
+.modal-title{
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.modal-text{
+  margin-top: 20px；
+  font-size: 30px;
+  line-height: 1.5;
+}
+
+.modal-btn{
+  margin-top: 20px;
+  width: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  font-size: 20px;
+}
+
+.top{
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: rgba(245,246,248,.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+/* ====== 强制全屏 App（覆盖旧样式）====== */
+html, body{
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow-x: hidden !important;
+  background: #f5f6f8 !important;
+}
+
+/* iPhone 安全区 + 全屏高度 */
+body{
+  min-height: 100svh !important;
+  padding-bottom: env(safe-area-inset-bottom) !important;
+}
+
+/* 关键：把 app 的“居中/限宽”全部干掉 */
+.app{
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  min-height: 100svh !important;
+  background: #f5f6f8 !important;
+}
+
+/* 让卡片在手机上看起来“像 App”，但不至于两边空太多 */
+.top{
+  padding: 14px 12px 8px !important;
+}
+
+.panel{
+  margin: 0 12px !important;
+}
+
+.content{
+  padding: 12px 12px 24px !important;
+}
+
+/* 图片区域别固定高度（否则可能显示不满或留白） */
+.img{
+  height: auto !important;
+  aspect-ratio: 16 / 9 !important;
+  width: 100% !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+.content{
+  min-height: calc(100svh - 160px) !important;
+}
+
+.modal-card{
+  animation: modalPop .2s ease-out;
+}
+
+@keyframes modalPop{
+  from{
+    transform: translate(-50%, -55%) scale(.96);
+    opacity: 0;
+  }
+  to{
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
